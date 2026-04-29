@@ -52,12 +52,12 @@ export default function Navbar() {
                   href={link.href}
                   style={{
                     display: "inline-flex", alignItems: "center", gap: 6,
-                    padding: "0 12px", height: 62,
+                    padding: "2px 12px 0", height: 62,
                     fontSize: 13.5, fontWeight: isActive ? 600 : 500,
                     color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
                     textDecoration: "none",
-                    borderBottom: isActive ? "2px solid var(--text-primary)" : "2px solid transparent",
-                    transition: "color 0.15s, border-color 0.15s",
+                    boxShadow: isActive ? "inset 0 -2px 0 var(--text-primary)" : "none",
+                    transition: "all 0.15s",
                     whiteSpace: "nowrap", boxSizing: "border-box",
                   }}
                 >
