@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -757,9 +757,9 @@ export default function ResourcesPage() {
                   }}>
                     {domain}
                   </span>
-                  <div style={{
+                  <div className="resources-grid" style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 240px), 1fr))",
                     gap: 14,
                   }}>
                     {domainCareers.map((c, i) => (

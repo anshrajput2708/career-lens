@@ -87,9 +87,9 @@ export default function RoadmapsPage() {
         </motion.div>
 
         {/* ── Grid ── */}
-        <div style={{
+        <div className="roadmaps-grid" style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 260px), 1fr))",
           gap: 14,
         }}>
           {careers.map((c, i) => (
