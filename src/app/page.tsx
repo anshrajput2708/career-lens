@@ -6,7 +6,8 @@ import Magnetic from "@/components/Magnetic";
 import { motion, useInView, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import {
   Target, Map, BookOpen, Clock, Flame, Zap, Users,
-  ArrowRight, Brain, BarChart2, Star, CheckCircle2, ExternalLink, Briefcase
+  ArrowRight, Brain, BarChart2, Star, CheckCircle2, ExternalLink, Briefcase,
+  Shield, Lock, Database
 } from "lucide-react";
 
 // ─── Animated counter ─────────────────────────────────────────────────────────
@@ -109,27 +110,21 @@ const FEATURES = [
   },
 ];
 
-const TESTIMONIALS = [
+const SECURITY_PILLARS = [
   {
-    quote: "I was shocked — I was already 74% ready to switch to UX. I thought I'd need years of prep. CareerLens showed me the 3 exact skills I was missing. I started applying after 4 months.",
-    name: "Priya S.",
-    role: "Marketing Manager",
-    company: "→ UX Designer at Razorpay",
-    rotate: "-2deg",
+    icon: <Shield size={24} color="var(--primary)" />,
+    title: "100% Local Processing",
+    desc: "Your data never leaves your device unless explicitly synced. We leverage client-side storage for maximum privacy and performance.",
   },
   {
-    quote: "Seeing '68% ready' with a 5-month roadmap was the push I needed. The roadmap page kept me accountable every single week. Now I'm a junior PM at a Series B startup.",
-    name: "Rohan M.",
-    role: "QA Engineer",
-    company: "→ Product Manager",
-    rotate: "1.5deg",
+    icon: <Lock size={24} color="#047857" />,
+    title: "Open Architecture",
+    desc: "Built on an open-source ethos. You can inspect the codebase, audit the algorithms, and verify exactly how your Fit Score is calculated.",
   },
   {
-    quote: "Every other platform gave me generic 'learn Python' advice. CareerLens told me I was missing 4 specific skills. I learned them in 3 months. The specificity is what's different.",
-    name: "Ananya K.",
-    role: "School Teacher",
-    company: "→ Data Analyst at Flipkart",
-    rotate: "-1deg",
+    icon: <Database size={24} color="#b45309" />,
+    title: "No Data Selling",
+    desc: "This is an academic project built for utility, not profit. Your career data, resumes, and AI assessments are yours, forever.",
   },
 ];
 
@@ -818,51 +813,51 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* ═══════════════════ 5. TESTIMONIALS (tilted cards) ═══════════════════ */}
+      {/* ═══════════════════ 5. PRIVACY & ARCHITECTURE ═══════════════════ */}
       <section style={{
         position: "relative", zIndex: 2,
         background: "var(--bg-base)",
         backgroundImage: "linear-gradient(rgba(78, 52, 46, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(78, 52, 46, 0.04) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
-        padding: "80px 40px",
+        padding: "clamp(48px, 8vw, 80px) clamp(16px, 4vw, 40px)",
         marginBottom: 0,
       }}>
         <div style={{ maxWidth: 1160, margin: "0 auto" }}>
-          <p style={{ ...S.label, marginBottom: 8 }}>FROM THE USERS</p>
+          <p style={{ ...S.label, marginBottom: 8 }}>PLATFORM INTEGRITY</p>
           <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text-primary)", marginBottom: 48 }}>
-            Real transitions. Real numbers.
+            Open Architecture. Privacy First.
           </h2>
 
-          {/* Editorial minimalist testimonial cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24, alignItems: "start" }}>
-            {TESTIMONIALS.map((t, i) => (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))", gap: 24, alignItems: "stretch" }}>
+            {SECURITY_PILLARS.map((p, i) => (
               <motion.div
-                key={t.name}
+                key={p.title}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
                 style={{
-                  background: "transparent",
-                  borderLeft: "2px solid rgba(78, 52, 46, 0.1)",
-                  padding: "12px 24px 20px",
+                  ...S.card,
+                  padding: "32px",
+                  borderTop: `4px solid ${i === 0 ? "var(--primary)" : i === 1 ? "#047857" : "#b45309"}`,
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
-                <div style={{ display: "flex", gap: 4, marginBottom: 16 }}>
-                  {[1,2,3,4,5].map(s => <Star key={s} size={14} fill="var(--primary)" color="var(--primary)" />)}
+                <div style={{ 
+                  width: 48, height: 48, borderRadius: 12, 
+                  background: "var(--bg-base)", border: "1px solid rgba(78, 52, 46, 0.1)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  marginBottom: 20
+                }}>
+                  {p.icon}
                 </div>
-                <p style={{ fontFamily: "var(--font-display)", fontSize: 24, color: "var(--text-primary)", lineHeight: 1.3, marginBottom: 20, fontStyle: "italic", letterSpacing: "-0.01em" }}>
-                  "{t.quote}"
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: "var(--text-primary)", marginBottom: 12, letterSpacing: "-0.02em" }}>
+                  {p.title}
+                </h3>
+                <p style={{ fontSize: 14, color: "#888", lineHeight: 1.65, margin: 0 }}>
+                  {p.desc}
                 </p>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: "50%", background: "rgba(78, 52, 46, 0.05)", border: "1px solid rgba(78, 52, 46, 0.1)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, flexShrink: 0, fontWeight: 700, color: "var(--primary)" }}>
-                    {t.name[0]}
-                  </div>
-                  <div>
-                    <p style={{ fontWeight: 800, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.04em", color: "var(--text-primary)" }}>{t.name}</p>
-                    <p style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 2 }}>{t.role} · <span style={{ color: "var(--primary)", fontWeight: 500 }}>{t.company}</span></p>
-                  </div>
-                </div>
               </motion.div>
             ))}
           </div>

@@ -50,3 +50,6 @@ CareerLens_Synopsis.html
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
+.env*.local
