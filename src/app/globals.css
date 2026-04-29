@@ -462,10 +462,45 @@ input, textarea, select {
   background-clip: text;
 }
 
-/* Responsive */
+/* ── Responsive / Mobile ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .section { padding: 60px 0; }
-  h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
+  .section { padding: 48px 0; }
+  h1 { font-size: clamp(1.8rem, 7vw, 3rem); }
+
+  /* Navbar — show hamburger, hide desktop links & CTAs */
+  .nav-desktop-links  { display: none !important; }
+  .nav-desktop-ctas   { display: none !important; }
+  .nav-hamburger      { display: flex !important; }
+  .nav-mobile-drawer  { display: block; }
+
+  /* Page padding for mobile */
+  .page-main { padding-top: 80px; padding-left: 16px; padding-right: 16px; }
+  .container  { padding: 0 16px; }
+  .container-sm { padding: 0 16px; }
+
+  /* CareerBro chat — full width on mobile */
+  .cb-window {
+    right: 0; left: 0;
+    width: 100%;
+    bottom: 80px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    max-height: 70vh;
+  }
+
+  /* FAB — smaller on mobile */
+  .cb-fab { bottom: 16px; right: 16px; padding: 11px 16px; font-size: 13px; }
+  .cb-fab-label { display: none; }
+
+  /* Cards — remove hover lift on touch */
+  .card:hover { transform: none; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: clamp(1.5rem, 6vw, 2rem); }
+  .btn-saas, .btn-secondary, .btn-primary {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
 }
 
 /* ── Utility: hide scrollbar while still being scrollable ── */
