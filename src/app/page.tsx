@@ -61,7 +61,7 @@ const FEATURES = [
           <p style={{ fontSize: 12, color: "#888" }}>Est. 3 months to transition</p>
           <div style={{ display: "flex", gap: 6, marginTop: 8, flexWrap: "wrap" }}>
             {["React", "CSS", "JS"].map(s => (
-              <span key={s} style={{ fontSize: 10, fontWeight: 700, padding: "2px 8px", borderRadius: 999, background: "var(--primary)20", color: "var(--primary)", border: "1px solid var(--primary)30" }}>{s} ✓</span>
+              <span key={s} style={{ fontSize: 10, fontWeight: 700, padding: "2px 8px", borderRadius: 999, background: "rgba(78, 52, 46, 0.05)", color: "var(--text-primary)", border: "1px solid rgba(78, 52, 46, 0.1)" }}>{s}</span>
             ))}
             {["TypeScript", "Testing"].map(s => (
               <span key={s} style={{ fontSize: 10, fontWeight: 700, padding: "2px 8px", borderRadius: 999, background: "var(--bg-elevated)", color: "#888", border: "1px solid #ddd" }}>+ {s}</span>
@@ -129,12 +129,12 @@ const SECURITY_PILLARS = [
 ];
 
 const TOOLS = [
-  { name: "AI Analysis", sub: "xAI Grok", icon: <Brain size={24} color="var(--primary)" />, color: "var(--primary)" },
-  { name: "Roadmaps", sub: "26 Paths", icon: <Map size={24} color="#047857" />, color: "#047857" },
-  { name: "Resources", sub: "100+ curated", icon: <BookOpen size={24} color="#b45309" />, color: "#b45309" },
-  { name: "Dashboard", sub: "Progress hub", icon: <BarChart2 size={24} color="#8d6e63" />, color: "#8d6e63" },
-  { name: "Streak Tracker", sub: "Daily habits", icon: <Flame size={24} color="#fb923c" />, color: "#fb923c" },
-  { name: "Skill Gap", sub: "Gap analysis", icon: <Zap size={24} color="#4ade80" />, color: "#4ade80" },
+  { name: "AI Analysis", sub: "Deep Engine", icon: <Brain size={24} color="var(--primary)" />, color: "var(--primary)" },
+  { name: "Roadmaps", sub: "26 Paths", icon: <Map size={24} color="var(--text-primary)" />, color: "var(--text-primary)" },
+  { name: "Resources", sub: "100+ Curated", icon: <BookOpen size={24} color="var(--text-primary)" />, color: "var(--text-primary)" },
+  { name: "Dashboard", sub: "Progress Hub", icon: <BarChart2 size={24} color="var(--text-primary)" />, color: "var(--text-primary)" },
+  { name: "Streak Tracker", sub: "Daily Habits", icon: <Flame size={24} color="var(--text-primary)" />, color: "var(--text-primary)" },
+  { name: "Skill Gap", sub: "Gap Analysis", icon: <Zap size={24} color="var(--text-primary)" />, color: "var(--text-primary)" },
 ];
 
 // ─── Styles (ossai-inspired light theme) ─────────────────────────────────────
@@ -710,8 +710,8 @@ export default function HomePage() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: 6, flexWrap: "wrap" as const }}>
-                {["React ✓", "CSS ✓", "JS ✓"].map(s => (
-                  <span key={s} style={{ fontSize: 11, fontWeight: 700, padding: "3px 10px", borderRadius: 999, background: "var(--primary)15", color: "var(--primary)", border: "1px solid var(--primary)25" }}>{s}</span>
+                {["React", "CSS", "JS"].map(s => (
+                  <span key={s} style={{ fontSize: 11, fontWeight: 700, padding: "3px 10px", borderRadius: 999, background: "rgba(78, 52, 46, 0.05)", color: "var(--text-primary)", border: "1px solid rgba(78, 52, 46, 0.1)" }}>{s}</span>
                 ))}
                 {["+ TypeScript", "+ Testing"].map(s => (
                   <span key={s} style={{ fontSize: 11, fontWeight: 700, padding: "3px 10px", borderRadius: 999, background: "var(--bg-elevated)", color: "#999", border: "1px solid #e5e5e5" }}>{s}</span>
@@ -722,10 +722,10 @@ export default function HomePage() {
 
           {/* Grid of 4 feature cards */}
           {[
-            { tag: "Curriculum", year: "2024", title: "26 Career Roadmaps", desc: "Week-by-week structured paths from beginner to job-ready, with live milestone tracking.", href: "/roadmaps", accent: "#047857" },
+            { tag: "Curriculum", year: "2024", title: "26 Career Roadmaps", desc: "Week-by-week structured paths from beginner to job-ready, with live milestone tracking.", href: "/roadmaps", accent: "var(--text-primary)" },
 
-            { tag: "Library", year: "2024", title: "Resources Library", desc: "100+ hand-picked books, courses, and videos for every career path.", href: "/resources", accent: "#8d6e63" },
-            { tag: "Daily Habit", year: "2024", title: "Daily Check-in", desc: "10 seconds a day. One question, one answer — your fit score moves every time.", href: "/checkin", accent: "var(--accent-amber)" },
+            { tag: "Library", year: "2024", title: "Resources Library", desc: "100+ hand-picked books, courses, and videos for every career path.", href: "/resources", accent: "var(--text-primary)" },
+            { tag: "Daily Habit", year: "2024", title: "Daily Check-in", desc: "10 seconds a day. One question, one answer — your fit score moves every time.", href: "/checkin", accent: "var(--text-primary)" },
           ].map((card, i) => (
             <motion.div
               key={card.title}
@@ -768,9 +768,9 @@ export default function HomePage() {
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
           {[
-            { step: "01", title: "Tell us who you are", detail: "3 focused questions. Under 2 minutes. Your background, what feels stuck, and what your dream role looks like.", color: "var(--primary)", icon: <Users size={28} color="var(--primary)" /> },
-            { step: "02", title: "Get your Fit Score", detail: "Our AI extracts every skill you already have — including ones you didn't know counted — and matches you to careers with precision.", color: "#047857", icon: <Target size={28} color="#047857" /> },
-            { step: "03", title: "Follow your roadmap", detail: "A personalised week-by-week plan with real resources, real milestones, and a score that moves as you learn.", color: "#b45309", icon: <Map size={28} color="#b45309" /> },
+            { step: "01", title: "Tell us who you are", detail: "3 focused questions. Under 2 minutes. Your background, what feels stuck, and what your dream role looks like.", color: "var(--text-primary)", icon: <Users size={28} color="var(--text-primary)" /> },
+            { step: "02", title: "Get your Fit Score", detail: "Our AI extracts every skill you already have — including ones you didn't know counted — and matches you to careers with precision.", color: "var(--text-primary)", icon: <Target size={28} color="var(--text-primary)" /> },
+            { step: "03", title: "Follow your roadmap", detail: "A personalised week-by-week plan with real resources, real milestones, and a score that moves as you learn.", color: "var(--text-primary)", icon: <Map size={28} color="var(--text-primary)" /> },
           ].map((s, i) => (
             <motion.div
               key={s.step}
@@ -864,10 +864,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════ 6. INTELLIGENCE STACK ("Jutsu Arsenal") ═══════════════════ */}
+      {/* ═══════════════════ 6. INTELLIGENCE STACK ═══════════════════ */}
       <section style={{ ...S.section, paddingTop: 80, paddingBottom: 80 }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <p style={{ ...S.label, fontFamily: "serif", fontSize: 13, color: "#bbb", marginBottom: 6 }}>私たちの聖なる道具</p>
           <p style={{ ...S.label, marginBottom: 8 }}>The Intelligence Stack</p>
           <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 700, letterSpacing: "-0.03em", color: "var(--text-primary)" }}>
             Everything we built to get you hired.
