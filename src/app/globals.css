@@ -493,6 +493,13 @@ input, textarea, select {
 
   /* Cards — remove hover lift on touch */
   .card:hover { transform: none; }
+
+  /* Hero quick-links row — hidden on mobile (in hamburger already) */
+  .hero-quicklinks { display: none !important; }
+
+  /* Wide feature card — full width on mobile */
+  [style*="gridColumn: \"span 2\""],
+  [style*="grid-column: span 2"] { grid-column: span 1 !important; }
 }
 
 @media (max-width: 480px) {

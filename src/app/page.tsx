@@ -175,7 +175,7 @@ const S = {
     zIndex: 2,
     maxWidth: 1160,
     margin: "0 auto",
-    padding: "0 40px",
+    padding: "0 clamp(16px, 4vw, 40px)",
   },
   card: {
     background: "#fff",
@@ -516,9 +516,10 @@ export default function HomePage() {
 
       {/* ═══════════════════ 1. HERO ═══════════════════ */}
       <motion.section 
-        style={{ 
-          position: "relative", zIndex: 2, maxWidth: 1160, margin: "0 auto", padding: "48px 40px 80px",
-          y: heroY, opacity: heroOpacity 
+        style={{
+          position: "relative", zIndex: 2, maxWidth: 1160, margin: "0 auto",
+          padding: "clamp(24px, 5vw, 48px) clamp(16px, 4vw, 40px) clamp(40px, 6vw, 80px)",
+          y: heroY, opacity: heroOpacity,
         }}
       >
         <div style={{ display: "flex", flexWrap: "wrap", gap: 40, alignItems: "center" }}>
@@ -585,11 +586,12 @@ export default function HomePage() {
               </Magnetic>
             </motion.div>
 
-            {/* Social-style links row */}
+            {/* Quick-links row — hidden on mobile (links are in hamburger menu) */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
+              className="hero-quicklinks"
               style={{ display: "flex", gap: 24, alignItems: "center" }}
             >
               {[
@@ -671,7 +673,7 @@ export default function HomePage() {
         </div>
 
         {/* Staggered grid — ossai style */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 360px), 1fr))", gap: 20 }}>
 
           {/* Wide card — Fit Score */}
           <motion.div
