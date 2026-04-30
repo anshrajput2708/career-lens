@@ -60,9 +60,14 @@ export default function CareerRoadmapLinks() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'var(--font-display)' }}>
             Explore <span className="gradient-text">Role-based</span> Roadmaps
           </h2>
-          <p className="max-w-2xl mx-auto text-lg" style={{ color: 'var(--text-secondary)' }}>
+          <p className="max-w-2xl mx-auto text-lg mb-6" style={{ color: 'var(--text-secondary)' }}>
             Dive straight into comprehensive curriculum mapped for specific industry tracks.
           </p>
+          <a href="https://roadmap.sh" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--border)] bg-[var(--bg-overlay)] hover:bg-[var(--border-bright)] transition-colors text-sm" style={{ color: 'var(--text-secondary)' }}>
+            <span>Curated resources powered by</span>
+            <span className="font-bold text-white">roadmap.sh</span>
+            <ArrowRight size={14} className="opacity-70" />
+          </a>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-20">

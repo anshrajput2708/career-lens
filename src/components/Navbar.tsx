@@ -29,9 +29,9 @@ export default function Navbar() {
         }}
       >
         <div style={{
-          width: "100%", height: 62,
+          width: "100%", maxWidth: 1140, margin: "0 auto", height: 62,
           display: "flex", alignItems: "center",
-          padding: "0 20px", boxSizing: "border-box",
+          padding: "0 24px", boxSizing: "border-box",
         }}>
           {/* Logo */}
           <Link href="/" style={{
@@ -43,7 +43,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop links */}
-          <div className="nav-desktop-links" style={{ display: "flex", alignItems: "center", marginLeft: 28 }}>
+          <div className="nav-desktop-links" style={{ display: "flex", alignItems: "center", marginLeft: 28, height: "100%" }}>
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -52,7 +52,7 @@ export default function Navbar() {
                   href={link.href}
                   style={{
                     display: "inline-flex", alignItems: "center", gap: 6,
-                    padding: "2px 12px 0", height: 62,
+                    padding: "2px 14px 0", height: "100%",
                     fontSize: 13.5, fontWeight: isActive ? 600 : 500,
                     color: isActive ? "var(--text-primary)" : "var(--text-secondary)",
                     textDecoration: "none",
@@ -61,12 +61,13 @@ export default function Navbar() {
                     whiteSpace: "nowrap", boxSizing: "border-box",
                   }}
                 >
-                  {link.name}
+                  <span style={{ transform: "translateY(1px)" }}>{link.name}</span>
                   {link.isNew && (
                     <span style={{
                       fontSize: 9, fontWeight: 700, letterSpacing: "0.03em",
                       background: "var(--text-primary)", color: "#fff",
                       borderRadius: 4, padding: "2px 5px", lineHeight: 1.6,
+                      transform: "translateY(1px)"
                     }}>New</span>
                   )}
                 </Link>
@@ -77,12 +78,12 @@ export default function Navbar() {
           <div style={{ flex: 1 }} />
 
           {/* Desktop CTAs */}
-          <div className="nav-desktop-ctas" style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <Link href="/onboard" className="btn-saas" style={{ height: 38, padding: "0 18px", fontSize: 13, whiteSpace: "nowrap" }}>
-              Get Fit Score
+          <div className="nav-desktop-ctas" style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <Link href="/onboard" className="btn-saas" style={{ height: 38, padding: "2px 18px 0", fontSize: 13, whiteSpace: "nowrap" }}>
+              <span style={{ transform: "translateY(0.5px)" }}>Get Fit Score</span>
             </Link>
-            <Link href="/onboard" className="btn-secondary" style={{ height: 38, padding: "0 16px", fontSize: 13, whiteSpace: "nowrap" }}>
-              Retake
+            <Link href="/onboard" className="btn-secondary" style={{ height: 38, padding: "2px 16px 0", fontSize: 13, whiteSpace: "nowrap" }}>
+              <span style={{ transform: "translateY(0.5px)" }}>Retake</span>
             </Link>
           </div>
 
