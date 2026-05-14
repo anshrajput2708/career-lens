@@ -191,13 +191,13 @@ Your task: produce a DEEPLY SPECIFIC, EVIDENCE-BASED analysis. Every statement m
 8. rewrite_suggestions: pull the ACTUAL weak bullet text from the resume verbatim. Then rewrite it using the PAR format (Problem -> Action -> Result). If the candidate provided no numbers, tell them what KIND of number they need to find (e.g. "reduced load time by X%"). Do NOT invent fake hardcoded numbers like "34%". Use placeholders like [X]% or [Metric].
 
 ## EXACT & BRUTAL SCORING ALGORITHM (VIOLATION = FAILURE):
-You MUST assign scores based on this exact rubric. Do NOT give "sympathy" points. If the resume's experience is totally unrelated to "${targetRole}" (e.g., Mobile Developer applying for UI/UX), the scores MUST BE BELOW 30.
+You MUST assign scores based on this exact rubric. Do NOT give "sympathy" points. You are evaluating for the EXACT target role: "${targetRole}". If the resume's experience is totally unrelated to "${targetRole}", the scores MUST BE BELOW 30.
 
 ### EXPERIENCE SCORE (0-100, weight 30%):
-- 90-100: Exact title match + senior impact.
-- 70-89: Exact title match + junior/mid impact.
-- 40-69: Adjacent role (e.g., Frontend applying for Full Stack).
-- 0-39: Unrelated role (e.g., Android Dev applying for UI/UX, or Sales applying for Engineering).
+- 90-100: Exact title match with "${targetRole}" + senior impact.
+- 70-89: Exact title match with "${targetRole}" + junior/mid impact.
+- 40-69: Adjacent/Related role to "${targetRole}".
+- 0-39: Completely unrelated role to "${targetRole}".
 - Write summary: "Score: X/100. [Job title] at [Company] is [related/unrelated] to ${targetRole} because [specific reason]..."
 
 ### PROJECTS SCORE (0-100, weight 20%):
@@ -207,8 +207,8 @@ You MUST assign scores based on this exact rubric. Do NOT give "sympathy" points
 - For each project found, create a projects_reviewed entry with: its actual name, a score, and a 2-sentence issue that cites what tech it used vs. what ${targetRole} needs.
 
 ### SKILLS MATCH SCORE (0-100, weight 25%):
-- Calculate exact percentage of required ${targetRole} skills present.
-- If target is UI/UX, but resume only lists Java/Kotlin, score MUST be 0-20.
+- Calculate exact percentage of required "${targetRole}" skills present in the resume.
+- If the resume skills have zero overlap with the standard industry requirements for "${targetRole}", the score MUST be 0-20.
 - Do NOT hallucinate skills.
 - present_skills: skills found verbatim in resume.
 - missing_critical: top skills for ${targetRole} completely absent from resume.
