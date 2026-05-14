@@ -1,4 +1,4 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { type UserProfile, type AnalysisResult } from "@/lib/utils/storage";
 
 function validateProfile(p: unknown): p is UserProfile {
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
             { role: "system", content: DASHBOARD_PROMPT_TEMPLATE },
             { role: "user", content: userPrompt }
           ],
-          { maxTokens: 2000, temperature: 0.1, model: "meta-llama/Meta-Llama-3-8B-Instruct" }
+          { maxTokens: 5000, temperature: 0.6 }
         );
         rawResponse = rawResponse.replace(/```json/gi, "").replace(/```/g, "").trim();
         const startIdx = rawResponse.indexOf("{");

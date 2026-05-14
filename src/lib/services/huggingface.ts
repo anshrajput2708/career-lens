@@ -74,10 +74,34 @@ export async function hfChat(messages: any[], options: any = {}) {
 }
 
 export async function hfVisionOcrFromDataUrl(dataUrl: string, opts?: { timeoutMs?: number; maxTokens?: number }): Promise<string> {
+    const geminiKey = process.env.GEMINI_API_KEY;
+    if (geminiKey) {
+      try {
+        const base64 = dataUrl.split(",")[1];
+        const mimeType = dataUrl.split(";")[0].split(":")[1];
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiKey}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{
+              parts: [
+                { text: "Extract all text from this image exactly as written. Preserve formatting." },
+                { inline_data: { mime_type: mimeType, data: base64 } }
+              ]
+            }]
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+        }
+      } catch (err) {
+        console.error("Gemini Vision OCR failed:", err);
+      }
+    }
+
     const apiKey = process.env.HUGGINGFACE_API_KEY;
     if (!apiKey) throw new Error("HUGGINGFACE_API_KEY is not configured.");
     
-    // Quick text fallback logic since HF vision inference via simple API is restrictive
-    // but the actual robust app relies on actual OCR or direct text read first in route.ts
-    return "Dummy vision extract. HF requires specific vision endpoints, but backend prefers text payload.";
+    return "Vision extraction failed. Please upload a PDF or text file instead of an image for deep analysis.";
 }

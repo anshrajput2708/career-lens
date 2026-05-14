@@ -121,8 +121,9 @@ function fallbackAnalysis(targetRole: string, text: string): AdvancedResumeAnaly
   const hasMetrics = /\d+%|\d+x|\$\d+|\d+\+/.test(lower);
   const hasSkills = /skills|typescript|python|sql|react|aws|docker/.test(lower);
   
-  const base = 38 + (hasProjects ? 18 : 0) + (hasMetrics ? 20 : 0) + (hasSkills ? 14 : 0);
-  const overall = clamp(base, 20, 88);
+  const lengthBonus = Math.min(15, Math.floor(text.length / 400));
+  const base = 30 + (hasProjects ? 15 : 0) + (hasMetrics ? 18 : 0) + (hasSkills ? 12 : 0) + lengthBonus;
+  const overall = clamp(base, 10, 95);
 
   return {
     overall_score: overall,
@@ -189,10 +190,10 @@ Your task: produce a DEEPLY SPECIFIC, EVIDENCE-BASED analysis. Every statement m
 7. improvement_plan actions must be ULTRA SPECIFIC to the ACTUAL resume text. Tell the candidate exactly which bullet to change, but you MUST base your suggestion strictly on the technologies and context present in their resume. DO NOT invent fake metrics or fake technologies (like "RepaintBoundary") unless they are heavily implied by the candidate's existing text.
 8. rewrite_suggestions: pull the ACTUAL weak bullet text from the resume verbatim. Then rewrite it using the PAR format (Problem -> Action -> Result). If the candidate provided no numbers, tell them what KIND of number they need to find (e.g. "reduced load time by X%"). Do NOT invent fake hardcoded numbers like "34%". Use placeholders like [X]% or [Metric].
 
-## SCORING METHODOLOGY:
+## STRICT SCORING METHODOLOGY (CRITICAL: DO NOT DEFAULT TO 70-80s, USE THE FULL 0-100 RANGE. BE BRUTAL AND EXACTING):
 
 ### EXPERIENCE (weight 30%):
-- Start at 100. Deduct:
+- Start at 100. Deduct aggressively:
   - -20 if job titles/company domain is unrelated to "${targetRole}"
   - -15 if zero quantified achievements in experience section
   - -10 per year of experience gap vs. role seniority expectations
@@ -200,7 +201,7 @@ Your task: produce a DEEPLY SPECIFIC, EVIDENCE-BASED analysis. Every statement m
 - Write summary: "Score: X/100. [Job title] at [Company] is [related/unrelated] to ${targetRole} because [specific reason]. Experience spans [N] years in [domain], which [maps/does not map] to [specific required domain]. Deducted [X]pts for [specific reason]."
 
 ### PROJECTS (weight 20%):
-- Start at 100. Deduct:
+- Start at 100. Deduct aggressively:
   - -10 per project with zero impact/outcome statement
   - -15 per project whose tech stack has zero overlap with ${targetRole} requirements
   - -20 if all projects are coursework/tutorials with no real users
@@ -328,7 +329,7 @@ ${resumeText}
         { role: "user", content: prompt },
       ];
       
-      const raw = await hfChat(messages, { temperature: 0.15, maxTokens: 3500 });
+      const raw = await hfChat(messages, { temperature: 0.65, maxTokens: 8000 });
       const cleaned = cleanJSON(raw);
       output = JSON.parse(cleaned) as AdvancedResumeAnalysisOutput;
     } catch (err) {
