@@ -329,7 +329,7 @@ ${resumeText}
         { role: "user", content: prompt },
       ];
       
-      const raw = await hfChat(messages, { temperature: 0.65, maxTokens: 8000 });
+      const raw = await hfChat(messages, { temperature: 0.4, maxTokens: 3000 });
       const cleaned = cleanJSON(raw);
       output = JSON.parse(cleaned) as AdvancedResumeAnalysisOutput;
     } catch (err) {
