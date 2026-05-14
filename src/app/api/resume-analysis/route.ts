@@ -190,51 +190,53 @@ Your task: produce a DEEPLY SPECIFIC, EVIDENCE-BASED analysis. Every statement m
 7. improvement_plan actions must be ULTRA SPECIFIC to the ACTUAL resume text. Tell the candidate exactly which bullet to change, but you MUST base your suggestion strictly on the technologies and context present in their resume. DO NOT invent fake metrics or fake technologies (like "RepaintBoundary") unless they are heavily implied by the candidate's existing text.
 8. rewrite_suggestions: pull the ACTUAL weak bullet text from the resume verbatim. Then rewrite it using the PAR format (Problem -> Action -> Result). If the candidate provided no numbers, tell them what KIND of number they need to find (e.g. "reduced load time by X%"). Do NOT invent fake hardcoded numbers like "34%". Use placeholders like [X]% or [Metric].
 
-## STRICT SCORING METHODOLOGY (CRITICAL: DO NOT DEFAULT TO 70-80s, USE THE FULL 0-100 RANGE. BE BRUTAL AND EXACTING):
+## EXACT & BRUTAL SCORING ALGORITHM (VIOLATION = FAILURE):
+You MUST assign scores based on this exact rubric. Do NOT give "sympathy" points. If the resume's experience is totally unrelated to "${targetRole}" (e.g., Mobile Developer applying for UI/UX), the scores MUST BE BELOW 30.
 
-### EXPERIENCE (weight 30%):
-- Start at 100. Deduct aggressively:
-  - -20 if job titles/company domain is unrelated to "${targetRole}"
-  - -15 if zero quantified achievements in experience section
-  - -10 per year of experience gap vs. role seniority expectations
-  - -5 if action verbs are weak (worked on, helped with, assisted)
-- Write summary: "Score: X/100. [Job title] at [Company] is [related/unrelated] to ${targetRole} because [specific reason]. Experience spans [N] years in [domain], which [maps/does not map] to [specific required domain]. Deducted [X]pts for [specific reason]."
+### EXPERIENCE SCORE (0-100, weight 30%):
+- 90-100: Exact title match + senior impact.
+- 70-89: Exact title match + junior/mid impact.
+- 40-69: Adjacent role (e.g., Frontend applying for Full Stack).
+- 0-39: Unrelated role (e.g., Android Dev applying for UI/UX, or Sales applying for Engineering).
+- Write summary: "Score: X/100. [Job title] at [Company] is [related/unrelated] to ${targetRole} because [specific reason]..."
 
-### PROJECTS (weight 20%):
-- Start at 100. Deduct aggressively:
-  - -10 per project with zero impact/outcome statement
-  - -15 per project whose tech stack has zero overlap with ${targetRole} requirements
-  - -20 if all projects are coursework/tutorials with no real users
+### PROJECTS SCORE (0-100, weight 20%):
+- 80-100: Complex, deployed projects with exact tech stack needed for ${targetRole}.
+- 40-79: Academic projects OR missing 50% of the required tech stack.
+- 0-39: No projects OR projects have ZERO tech stack overlap with ${targetRole}.
 - For each project found, create a projects_reviewed entry with: its actual name, a score, and a 2-sentence issue that cites what tech it used vs. what ${targetRole} needs.
 
-### SKILLS (weight 25%):
-- List EVERY skill word found in the resume verbatim.
-- List the canonical required skills for ${targetRole}.
-- Count matching skills. Score = (matches / required) * 100, capped at 100.
+### SKILLS MATCH SCORE (0-100, weight 25%):
+- Calculate exact percentage of required ${targetRole} skills present.
+- If target is UI/UX, but resume only lists Java/Kotlin, score MUST be 0-20.
+- Do NOT hallucinate skills.
 - present_skills: skills found verbatim in resume.
 - missing_critical: top skills for ${targetRole} completely absent from resume.
 - missing_nicetohave: secondary skills for ${targetRole} absent from resume.
 - bonus_skills: skills in resume that are valuable but not required for ${targetRole}.
 
-### IMPACT METRICS (weight 15%):
+### IMPACT METRICS SCORE (0-100, weight 15%):
 - Scan every bullet point. List every number, percentage, dollar amount, user count found.
-- Score by count: 0=10pts, 1-2=30pts, 3-5=55pts, 6-9=75pts, 10+=90pts
-- missing_metric_locations: name the EXACT section/company/project where metrics are absent. e.g. "LearnHyve internship — 3 bullets with zero numbers", "CropKart project — outcome section missing user count or performance data".
+- 0 numbers/metrics found = 10 pts.
+- 1-2 metrics = 30 pts.
+- 3-5 metrics = 55 pts.
+- 6-9 metrics = 75 pts.
+- 10+ metrics = 90-100 pts.
+- missing_metric_locations: name the EXACT section/company/project where metrics are absent.
 
-### ATS READABILITY (weight 10%):
-- Check: standard headings (Education, Experience, Projects, Skills), no tables, no columns, readable fonts, keywords present.
+### ATS READABILITY SCORE (0-100, weight 10%):
+- Clean text, standard headings = 80-100.
+- Missing standard headings, weird symbols = 40-70.
 - passed_checks: list what IS correct.
-- issues: list what is wrong, with -15pt deduction per issue.
+- issues: list what is wrong.
 
 ### KEYWORD MATCH:
-- List the top 15 most important keywords for "${targetRole}".
-- Check each one against the resume text (case-insensitive).
-- matched: keywords found. missing: keywords not found.
+- List top 15 most important keywords for "${targetRole}".
 - Score = (found / 15) * 100.
+- matched: keywords found. missing: keywords not found.
 
-## OVERALL SCORE:
-Formula: (experience * 0.30) + (skills * 0.25) + (projects * 0.20) + (impact_metrics * 0.15) + (ats_readability * 0.10)
-Round to nearest integer.
+### FINAL OVERALL_SCORE:
+You MUST calculate exactly: (experience * 0.30) + (skills * 0.25) + (projects * 0.20) + (impact_metrics * 0.15) + (ats_readability * 0.10). Round to nearest integer. DO NOT DEFAULT TO 70-80. If it calculates to 25, return 25.
 
 ## TONE RULES:
 - overall_summary: Write like a senior recruiter talking to a hiring manager. Dense, specific, no filler.
